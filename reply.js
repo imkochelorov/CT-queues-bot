@@ -33,7 +33,7 @@ function groupReply(message) {
         name = split[1] + " " + split[2] + " " + split[3];
     }
     if (split[0] === queueCommand + telegramTag && name !== null) {
-        sendQueue(spreadsheet, name, chatId, message.message_id);
+        sendQueue(spreadsheet, queueSheets[0], name, chatId, message.message_id);
         return;
     }
 }
@@ -63,7 +63,13 @@ function privateReply(message) {
     }
     const name = registration[2];
     if (text === queueCommand) {
-        sendQueue(spreadsheet, name, senderId);
+        let queueSheetIndex = (registration[3] - 2023) * -2; //2023 -> 0; 2022 -> 2
+        if (sendQueue(spreadsheet, queueSheets[queueSheetIndex], name, senderId) === null) {
+            ++queueSheetIndex;
+            if (sendQueue(spreadsheet, queueSheets[queueSheetIndex], name, senderId) === null) {
+                sendMessage(senderId, personNotQueuedMessage);
+            }
+        }
     } else {
         sendMessage(senderId, wrongMessageType);
     }

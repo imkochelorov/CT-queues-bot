@@ -19,6 +19,7 @@ const unregisteredMessage = `
 `;
 const unregisterMessage = "Пожалуйста, зарегистрируйтесь снова, введя ФИО, строго совпадающие с табличным";
 const greetMessage = "<b>Для начала работы с ботом введите своё ФИО, строго совпадающее с табличным</b>";
+const doubtfulRegistration = "Указанное ФИО не найдено в таблице. Регистрация продолжится, однако:\r\nЕсли вы y2023, пожалуйста, перерегистрируйтесь с помощью /unregister\r\nЕсли вы y2022, убедитесь, что ФИО введено корректно и пните @erzherzog_dx";
 const successfullRegistrationMessage = `
 Регистрация прошла успешно!
 <b>Отписаться от рассылки</b>
@@ -36,8 +37,6 @@ const groupHelpMessage = `
 ` + helpCommand + telegramTag;
 
 const personalHelpMessage = `
-<i>Бот работает с очередью парадигм программирования групп M3136-M3139</i>
-
 <b>Получить свою позицию в очереди</b>
 ` + queueCommand + `
 
@@ -56,8 +55,8 @@ const personNotQueuedMessage = "Указанный человек не стои�
 const queuesCountLocalization = ["<b>одной</b> очереди", "<b>двух</b> очередях", "<b>трёх</b> очередях", "<b>четырёх</b> очередях", "<b>пяти</b> очередях"];
 const queuesPositionLocalization = ["<b>первый</b> в очереди", "<b>второй</b> в очереди"];
 
-const studentsSheet = "students"
-const registrationsSheet = "bot_registrations"
-const paradigmsQueueScoreSheet = "paradigms"
+const studentsSheets = ["y2023", "y2022"]
+const registrationsSheets = ["bot_registrations_y2023", "bot_registrations_y2022"];
+const queueSheets = ["M3132-35", "M3136-39", "M3232-35", "M3236-39"];
 
 const registrationsCountCell = "D1"

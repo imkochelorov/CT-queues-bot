@@ -10,19 +10,19 @@ function getQueuePositions(queue, name) {
     return queuePosition;
 }
 
-function sendQueue(spreadsheet, name, id, message_id = null) {
-    const queue = spreadsheet.getSheetByName(paradigmsQueueScoreSheet).getRange("C4:G100").getValues();
+function sendQueue(spreadsheet, sheetName, name, id, message_id = null) {
+    const queue = spreadsheet.getSheetByName(sheetName).getRange("C4:G100").getValues();
     const queuePositions = getQueuePositions(queue, name);
 
     if (queuePositions === null || queuePositions.length === 0) {
-        sendMessage(id, personNotQueuedMessage, message_id);
-        return;
+        //sendMessage(id, personNotQueuedMessage, message_id);
+        return null;
     }
 
     let message = "";
     message += "Вы стоите в " + queuesCountLocalization[queuePositions.length - 1] + ":";
 
-    const practitioners = spreadsheet.getSheetByName(paradigmsQueueScoreSheet).getRange("C1:G1").getValues();
+    const practitioners = spreadsheet.getSheetByName(sheetName).getRange("C1:G1").getValues();
     for (let queueIndex = 0; queueIndex < queuePositions.length; queueIndex++) {
         message += "\r\n\r\n" + "<b>" + practitioners[0][queuePositions[queueIndex][1]] + "</b>";
         for (let i = 0; i < queuePositions[queueIndex][0]; i++) {
@@ -32,11 +32,12 @@ function sendQueue(spreadsheet, name, id, message_id = null) {
     }
 
     sendMessage(id, message, message_id);
+    return message;
 }
-function notifyQueue(spreadsheet = SpreadsheetApp.getActive()) {
-    const practitioners = spreadsheet.getSheetByName(paradigmsQueueScoreSheet).getRange("C1:G1").getValues();
+function notifyQueue(spreadsheet, sheetName) {
+    const practitioners = spreadsheet.getSheetByName(sheetName).getRange("C1:G1").getValues();
 
-    const queue = spreadsheet.getSheetByName(paradigmsQueueScoreSheet).getRange("C4:G5").getValues();
+    const queue = spreadsheet.getSheetByName(sheetName).getRange("C4:G5").getValues();
     for (let queuePosition = 0; queuePosition < queue.length; queuePosition++) {
         for (let practitionerIndex = 0; practitionerIndex < 5; practitionerIndex++) {
             const name = queue[queuePosition][practitionerIndex].replace(/\d+\s\d+\s/, "");

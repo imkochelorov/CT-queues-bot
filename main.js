@@ -21,5 +21,8 @@ function doGet() {
 function timeTrigger() {
     Logger.log("got time trigger");
     const spreadsheet = SpreadsheetApp.getActive();
-    notifyQueue(spreadsheet);
+
+    for (let queueSheet in queueSheets) {
+        notifyQueue(spreadsheet, queueSheets[queueSheet]);
+    }
 }
