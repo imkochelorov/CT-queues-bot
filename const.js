@@ -23,7 +23,7 @@ const doubtfulRegistration = "Указанное ФИО не найдено в �
 const successfullRegistrationMessage = `
 Регистрация прошла успешно!
 <b>Отписаться от рассылки</b>
-` + unsubscribeCommand;
+` + unregisterCommand;
 const wrongMessageType = "Неверный формат сообщения";
 
 const groupHelpMessage = `

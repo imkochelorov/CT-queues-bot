@@ -5,7 +5,7 @@ function getRegistrationByValueAndIndex(spreadsheet, value, index) {
     let registration;
     for (let i = 0; i < registrationsSheets.length; i++) {
         registeredCount = spreadsheet.getSheetByName(registrationsSheets[i]).getRange(registrationsCountCell).getValue();
-        values = spreadsheet.getSheetByName(registrationsSheets[i]).getRange("A2:D" + registeredCount).getValues();
+        values = spreadsheet.getSheetByName(registrationsSheets[i]).getRange("A2:G" + registeredCount).getValues();
         registration = extractValue(values, value, index);
         if (registration !== null) {
             break;
